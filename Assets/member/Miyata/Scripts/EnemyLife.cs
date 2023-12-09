@@ -17,6 +17,7 @@ public class EnemyLife : MonoBehaviour
     {
         if(el==0)
         {
+            SoundManager.instance.StopBGM();
             SceneManager.LoadScene ("GameClearScene");
         }
     }

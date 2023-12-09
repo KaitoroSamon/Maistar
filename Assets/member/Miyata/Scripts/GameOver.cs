@@ -12,6 +12,7 @@ public class GameOver : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             sm.FinishGame();
+            SoundManager.instance.StopBGM();
         }
     }
 }

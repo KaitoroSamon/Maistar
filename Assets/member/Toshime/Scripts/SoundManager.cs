@@ -591,7 +591,21 @@ public class SoundManager : MonoBehaviour
         // 音源の本再生処理
         audioSource.Play();
         StartCoroutine(_audioSorces.AudioSourceDelete(audioType, audioSource));
-    } 
+    }
+
+    public void StopBGM()
+    {
+        // 再生用の音源をセットした音源再生所を取得する
+        AudioSource audioSource = _audioSorces.SetAudioSource(AudioOfType.BGM, null);
+
+        if (audioSource == null)
+        {
+            Debug.Log("オーディオソースの取得失敗");
+            return;
+        } 
+        
+        audioSource.Stop();
+    }
 
     #endregion
     

@@ -108,6 +108,7 @@ public class Player : MonoBehaviour
         {
             //矢を生成
             Arrow a = Instantiate(arrow, armJoint.position + armJoint.right * 2 , armJoint.localRotation);
+            SoundManager.instance.PlayAudioSorce(SoundManager.AudioOfType.PLAYERSE,0);
             a.Speed = power * 40;
             a.ShoothingStar(power * 30f);
             power = 0;
