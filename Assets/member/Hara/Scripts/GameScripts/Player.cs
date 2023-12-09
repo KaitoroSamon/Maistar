@@ -15,8 +15,18 @@ public class Player : MonoBehaviour
     [SerializeField,Tooltip("腕の回転位置")] Transform armJoint = null;
     [SerializeField,Tooltip("生成矢")] Arrow arrow = null;
     [SerializeField, Tooltip("最大エフェクト")] Parts maxPowEffect = null;
+    
+    [SerializeField]
+    private GameObject groundCheck;
+    [SerializeField]
+    private float playerHeight;  
+    public LayerMask Ground;  
+    
+    
     //重力
-    Rigider rigid;
+    //Rigider rigid;
+    [SerializeField] private Rigidbody2D rigid;
+    [SerializeField] private bool isGround;
     Parts powEffect = null;
     float power = 0;
     enum Mode
@@ -27,7 +37,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        rigid = GetComponent<Rigider>();
+        //rigid = GetComponent<Rigider>();
     }
 
     void Update()
@@ -56,7 +66,8 @@ public class Player : MonoBehaviour
             mode = Mode.Walk;
         }
 
-        if (rigid.isGround)//地に足のついた
+        //if(rigid.isGround)
+        if (isGround)//地に足のついた
         {
             if (dire == 0) //移動していないならSTOP
             {
@@ -98,6 +109,7 @@ public class Player : MonoBehaviour
             //矢を生成
             Arrow a = Instantiate(arrow, armJoint.position + armJoint.right * 2 , armJoint.localRotation);
             a.Speed = power * 40;
+            a.ShoothingStar(power * 30f);
             power = 0;
             animShot.ChangePic(0);
             if(powEffect != null)Destroy(powEffect.gameObject);
@@ -110,12 +122,16 @@ public class Player : MonoBehaviour
             new Vector3((dire != 0 ? Mathf.Sign(dire) : animStop.transform.localScale.x), 1, 1);
 
         //移動
-        rigid.velocity.x = dire;
+        //rigid.velocity.x = dire;
+        rigid.velocity = new Vector2(dire, rigid.velocity.y);
+
 
         //アニメーションの表示非表示
         animStop.enabled = mode == Mode.Stop;
         animMove.gameObject.SetActive(mode == Mode.Walk);
         animJump.gameObject.SetActive(mode == Mode.Jump);
+        
+        isGround = Physics2D.Raycast(groundCheck.transform.position, Vector3.down, playerHeight * 0.5f, Ground);
     }
 
     void AnimUpdate()
@@ -127,6 +143,8 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+    
+    
 
     void RotateArm()
     {

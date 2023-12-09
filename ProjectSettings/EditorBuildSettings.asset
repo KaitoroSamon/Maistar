@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/member/Miyata/Scenes/GameOverScene.unity
     guid: 548ab8e147ba86d4caa0057255424e85
+  - enabled: 1
+    path: Assets/member/Miyata/Scenes/GameClearScene.unity
+    guid: e0c357cb66c2b4aa3a83321be361d851
   m_configObjects: {}

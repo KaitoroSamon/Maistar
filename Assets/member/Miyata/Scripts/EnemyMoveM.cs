@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class EnemyMoveM : MonoBehaviour
 {
     public  float enemySpeed; 
     // Start is called before the first frame update

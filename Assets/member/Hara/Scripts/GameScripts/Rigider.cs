@@ -4,23 +4,23 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// •¨—‹““®ƒNƒ‰ƒX
+/// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X
 /// </summary>
 public class Rigider : MonoBehaviour
 {
-    [SerializeField, Tooltip("d—Í’l‚ğƒCƒ“ƒXƒyƒNƒ^‚©‚çİ’è‚Å‚«‚é‚æ‚¤‚É")]
+    [SerializeField, Tooltip("ï¿½dï¿½Í’lï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Xï¿½yï¿½Nï¿½^ï¿½ï¿½ï¿½ï¿½İ’ï¿½Å‚ï¿½ï¿½ï¿½æ‚¤ï¿½ï¿½")]
     float pyhs = -1f;
-    [SerializeField, Tooltip("Å‘å‰Á‘¬“x")] float maxVelocity = 50;
+    [SerializeField, Tooltip("ï¿½Å‘ï¿½ï¿½ï¿½ï¿½ï¿½x")] float maxVelocity = 50;
     public Vector3 velocity;
-    //’n–Ê‚É’…‚¢‚½‚©‚Ç‚¤‚©
+    //ï¿½nï¿½Ê‚É’ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
     public bool isGround { get { return transform.position.y <= 0; } }
 
     void Update()
     {
-        //‹ó’†‚Ìd—Í‚ğ‚©‚¯‚é
+        //ï¿½ó’†‚Ìï¿½ï¿½dï¿½Í‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (velocity.y > 0 || transform.position.y != 0)
         {
-            //Å‘å‰Á‘¬“xˆÈ‰º‚È‚çˆÚ“®—Ê‰ÁZ
+            //ï¿½Å‘ï¿½ï¿½ï¿½ï¿½ï¿½xï¿½È‰ï¿½ï¿½È‚ï¿½Ú“ï¿½ï¿½Ê‰ï¿½ï¿½Z
             if (Mathf.Abs(velocity.y) <= maxVelocity)
                 velocity.y += pyhs;
 
@@ -32,7 +32,7 @@ public class Rigider : MonoBehaviour
 
         }
 
-        //ˆÚ“®
+        //ï¿½Ú“ï¿½
         transform.position += velocity * Time.deltaTime;
     }
 

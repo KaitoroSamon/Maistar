@@ -5,15 +5,15 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 
 /// <summary>
-/// ƒQ[ƒ€ŠÇ—Ò
+/// ï¿½Qï¿½[ï¿½ï¿½ï¿½Ç—ï¿½ï¿½ï¿½
 /// </summary>
 public class Director : MonoBehaviour
 {
-    [SerializeField, Tooltip("“I")] GameObject target = null;
-    [SerializeField, Tooltip("ƒXƒRƒA•\¦ƒeƒLƒXƒg")] Text scoreText = null;
-    [SerializeField, Tooltip("ŠÔ•\¦ƒeƒLƒXƒg")] Text timeText = null;
-    public UnityEvent toResult; //Œ‹‰Ê•\¦ƒCƒxƒ“ƒg
-    public static float cameraDirection = 0; //ƒJƒƒ‰‚ª“®‚­•ûŒü
+    [SerializeField, Tooltip("")] GameObject target = null;
+    [SerializeField, Tooltip("")] Text scoreText = null;
+    [SerializeField, Tooltip("")] Text timeText = null;
+    public UnityEvent toResult; //ï¿½ï¿½ï¿½Ê•\ï¿½ï¿½ï¿½Cï¿½xï¿½ï¿½ï¿½g
+    public static float cameraDirection = 0; //ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     int score = 0;
     int nowScore = 0;
     float timer = 0;
@@ -26,7 +26,7 @@ public class Director : MonoBehaviour
     {
         if (mode == 1)
         {
-            //“I¶¬
+            //ï¿½Iï¿½ï¿½ï¿½ï¿½
             time += Time.deltaTime;
             if (time >= timer)
             {
@@ -35,7 +35,7 @@ public class Director : MonoBehaviour
                 InstTarget();
             }
 
-            //ƒJƒEƒ“ƒgƒ_ƒEƒ“
+            //ï¿½Jï¿½Eï¿½ï¿½ï¿½gï¿½_ï¿½Eï¿½ï¿½
             countDown -= Time.deltaTime;
             if ((int)countDown <= 0)
             {
@@ -60,7 +60,7 @@ public class Director : MonoBehaviour
     }
     void InstTarget()
     {
-        //ƒJƒƒ‰‚æ‚èæ‚ÌêŠ‚Å“I¶¬
+        //ï¿½Jï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÌêŠï¿½Å“Iï¿½ï¿½ï¿½ï¿½
         Instantiate(target,
             Camera.main.transform.position + Vector3.right * 35,
             Quaternion.identity);
@@ -73,7 +73,7 @@ public class Director : MonoBehaviour
         if (scoreCoroutine == null)
             scoreCoroutine = StartCoroutine(Scorerer());
     }
-    //ƒXƒRƒA‚ª•Ï‰»‚·‚éƒRƒ‹[ƒ`ƒ“
+    //ï¿½Xï¿½Rï¿½Aï¿½ï¿½ï¿½Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½Rï¿½ï¿½ï¿½[ï¿½`ï¿½ï¿½
     IEnumerator Scorerer()
     {
         while (nowScore <= score)
@@ -83,7 +83,7 @@ public class Director : MonoBehaviour
         }
         scoreCoroutine = null;
     }
-    //ƒCƒ“ƒXƒyƒNƒ^‚©‚çQÆ
+    //ï¿½Cï¿½ï¿½ï¿½Xï¿½yï¿½Nï¿½^ï¿½ï¿½ï¿½ï¿½Qï¿½ï¿½
     public void ChangeMode(int mode)
     {
         this.mode = mode;

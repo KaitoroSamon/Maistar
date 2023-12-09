@@ -17,7 +17,7 @@ public class EnemyLife : MonoBehaviour
     {
         if(el==0)
         {
-            //SceneManager.LoadScene ("GameClearScene");
+            SceneManager.LoadScene ("GameClearScene");
         }
     }
 

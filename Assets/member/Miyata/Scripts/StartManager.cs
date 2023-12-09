@@ -8,6 +8,8 @@ public class StartManager : MonoBehaviour
     public GameObject maingame;
     public GameObject title;
     public int sceneNumber = 0;
+
+    [SerializeField] private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,7 @@ public class StartManager : MonoBehaviour
             {
                 title.SetActive (false);
                 maingame.SetActive (true);
+                player.SetActive(true);
                 sceneNumber++;
             }
         }

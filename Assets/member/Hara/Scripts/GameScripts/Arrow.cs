@@ -1,34 +1,58 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using System.Net.Mime;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
-/// –îƒRƒ“ƒgƒ[ƒ‰[
+/// ï¿½ï¿½Rï¿½ï¿½ï¿½gï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½[
 /// </summary>
 public class Arrow : Col
 {
     [SerializeField] Parts isGroundEffect = null;
     public float Speed { get; set; }
-    Rigider rigid;
+    //Rigider rigid;
+    [SerializeField] private Rigidbody2D rigid;
+    [SerializeField] private BoxCollider2D col;
+    [SerializeField] private bool isRigid;
+    private bool isGround{ get { return transform.position.y <= 0; } }
     Rect range = new Rect(0, 0, 1, 1);
     bool prevGrounded = true;
+    
+    
 
     void Start()
     {
-        rigid = GetComponent<Rigider>();
+        // Manager.AddArrows(this);
+        // rigid.velocity = Vector3.zero;
+        // rigid.AddForce(transform.right * Speed);
+    }
+
+    public void ShoothingStar(float power)
+    {
         Manager.AddArrows(this);
         rigid.velocity = Vector3.zero;
-        rigid.AddForce(transform.right * Speed);
+        rigid.AddForce(transform.right * power * Speed);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("enemy") || other.gameObject.CompareTag("Floor"))
+        {
+            this.gameObject.transform.SetParent(other.gameObject.transform);
+            col.isTrigger = true;
+            isRigid = false;
+            Destroy(rigid);
+        }
     }
 
     void Update()
     {
-        if (rigid.enabled)
+        if (isRigid)
         {
-            if (rigid.isGround && !prevGrounded) //’…’n‚µ‚½uŠÔ
+            if (isGround && !prevGrounded) //ï¿½ï¿½ï¿½nï¿½ï¿½ï¿½ï¿½ï¿½uï¿½ï¿½
             {
-                rigid.enabled = false;
-                RemoveList();//“–‚½‚è”»’èíœ
+                isRigid = false;
+                RemoveList();//ï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½íœ
                 Vector3 pos = transform.position;
                 pos.y = 0;
                 Parts p = Instantiate(isGroundEffect, pos, Quaternion.identity, transform);
@@ -39,13 +63,16 @@ public class Arrow : Col
 
                 Destroy(gameObject, 10);
             }
-            prevGrounded = rigid.isGround;
+            prevGrounded = isGround;
         }
 
-        //—‚¿‚é‰ñ“]ƒ‚[ƒVƒ‡ƒ“
-        transform.rotation = Quaternion.AngleAxis(
-            Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg,
-            Vector3.forward);
+        if (rigid != null)
+        {
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
+            transform.rotation = Quaternion.AngleAxis(
+                Mathf.Atan2(rigid.velocity.y, rigid.velocity.x) * Mathf.Rad2Deg,
+                Vector3.forward);
+        }
     }
 
     void RemoveList()
@@ -55,7 +82,7 @@ public class Arrow : Col
     public override void OnHit()
     {
         RemoveList();
-        //“–‚½‚è”»’è‚Å‚ÌƒGƒ‰[‘Îô‚Æ‚µ‚Ä1•bŒã‚Éíœ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½è”»ï¿½ï¿½Å‚ÌƒGï¿½ï¿½ï¿½[ï¿½Îï¿½Æ‚ï¿½ï¿½ï¿½1ï¿½bï¿½ï¿½Éíœ
         Destroy(gameObject, 0.1f);
     }
 }
