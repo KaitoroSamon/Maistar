@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/member/Miyata/Scenes/Maistar.unity
+    guid: cb5ddd32f82a64948af6cb135a893a77
+  - enabled: 1
+    path: Assets/member/Miyata/Scenes/GameOverScene.unity
+    guid: 548ab8e147ba86d4caa0057255424e85
   m_configObjects: {}
